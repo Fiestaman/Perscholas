@@ -51,3 +51,46 @@ for (let movie of movies) {
   if (movie === "The Matrix") break;
   console.log(movie);
 }
+
+// Slice
+const copyArr = movies.slice(1, 3);
+console.log(copyArr);
+console.log(movies);
+
+// ... - Spread operator
+let moviesCopy = ["Toy Story", ...movies, "Interstellar"];
+console.log(moviesCopy);
+
+let moviesCopy2 = [...movies];
+movies.pop();
+console.log(moviesCopy2);
+
+// Join - create a string from an array
+let moviesStr = movies.join(", ");
+console.log(moviesStr);
+
+// Split - create an array from a string
+const str = "Hello World it's a good friday";
+
+const strArr = str.split(" ");
+
+const names = ["Ramya", "Candra", "Devin", "Gino", "Arwa", "Ramya"];
+
+// indexOf
+console.log(names.indexOf("Candra"));
+
+// lastIndexOf - returns last index of value
+console.log(names.lastIndexOf("Ramya"));
+
+// includes
+console.log(names.includes("Devin"));
+
+// reverse
+console.log(names.reverse());
+
+// sort
+const fruits = ["apple", "banana", "Cucumber"];
+console.log(fruits.sort());
+
+const nums = [4, 10, 5, 6];
+console.log(nums.sort());

@@ -8,12 +8,10 @@ let arr_2total = 0;
 for (let item of arr_1) {
   arr_1total += item;
 }
-// console.log("Array1 total is: " + arr_1total);
 
 for (let item of arr_2) {
   arr_2total += item;
 }
-// console.log("Array2 total is: " + arr_2total);
 
 let total = arr_1total + arr_2total;
 console.log(total);
@@ -28,3 +26,7 @@ let arr = [43, "what", 9, true, "cannot", false, "be", 3, true];
 for (let i = 0; arr.length > 0; i++) {
   console.log(arr.pop());
 }
+
+// for (let i = arr.length - 1; 1 >= 0; i--) {
+//   console.log(arr[i]);
+// }
