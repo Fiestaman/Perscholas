@@ -1,0 +1,65 @@
+img {
+  width: 50px;
+  position: absolute;
+}
+#face {
+  top: 155px;
+  left: 105px;
+  width: 400px;
+}
+#eyes1 {
+  top: 350px;
+  left: 245px;
+  width: 145px;
+}
+#mouth1 {
+  top: 445px;
+  left: 230px;
+  width: 165px;
+}
+#nose2 {
+  top: 388px;
+  left: 272px;
+  width: 85px;
+}
+
+#hat {
+  top: 108px;
+  left: 145px;
+  width: 335px;
+}
+
+#headphones {
+  top: 235px;
+  left: 135px;
+  height: 220px;
+  width: 335px;
+}
+
+#bird {
+  top: 55px;
+  left: 255px;
+  height: 120px;
+  width: 130px;
+}
+
+#necklace {
+  top: 495px;
+  left: 140px;
+  height: 220px;
+  width: 330px;
+}
+
+#crown {
+  top: 53px;
+  left: 305px;
+  height: 20px;
+  width: 32px;
+}
+
+#bowtie {
+  top: 85px;
+  left: 309px;
+  height: 20px;
+  width: 32px;
+}

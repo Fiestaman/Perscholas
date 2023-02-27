@@ -1,0 +1,69 @@
+/* Insert any CSS code below here */
+
+#outside {
+  z-index: 1;
+  position: absolute;
+  background-color: pink;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: 1s;
+  transform-origin: 0;
+}
+
+.open-card {
+  transform: rotateY(90deg);
+}
+
+#outside-title {
+  color: red;
+  font-family: Arial;
+  font-size: 24pt;
+  text-align: center;
+}
+
+#outside-pic {
+  width: 250px;
+  height: 250px;
+}
+
+#outside-help {
+  color: black;
+  font-family: Arial;
+  font-size: 12pt;
+  text-align: center;
+  padding: 20px;
+}
+
+#inside {
+  z-index: 0;
+  position: absolute;
+  background-color: pink;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+#inside-title {
+  color: red;
+  font-family: Arial;
+  font-size: 24pt;
+  text-align: center;
+}
+
+#inside-pic {
+  width: 250px;
+  height: 250px;
+}
+
+#message {
+  color: red;
+  font-family: Courier;
+  font-size: 12pt;
+  text-align: center;
+}
+
+button {
+  background: red;
+  color: white;
+}
