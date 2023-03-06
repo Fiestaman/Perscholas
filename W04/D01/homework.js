@@ -88,3 +88,29 @@ timmy.ageUp(15);
 timmy.eat(2);
 
 timmy.exercise(2);
+
+class Dinner {
+  constructor(app = "none", ent, des = "none") {
+    this.appetizer = app;
+    this.entree = ent;
+    this.dessert = des;
+  }
+}
+
+class Chef {
+  constructor(name) {
+    this.name = name;
+    this.meals = [];
+  }
+  cook(app, ent, des) {
+    const newMeal = new Dinner(app, ent, des);
+    this.meals.push(newMeal);
+    return newMeal;
+  }
+}
+
+const jimmy = new Chef("Jimmy");
+jimmy.cook("Edamame", "Tempura Udon", "Green Tea Icecream");
+jimmy.cook("Cheese Fries", "T-bone Steak", "Chocolate Fudge Cake");
+jimmy.cook("Breadsticks", "Spaghetti & Meatballs", "Tiramisu");
+console.log(jimmy.meals);
