@@ -168,6 +168,22 @@ console.log(fibonacci(6));
 ////////////////////////////////
 //  Checkerboard
 ////////////////////////////////
+function checkerboard(num) {
+  let oddLine = "* ";
+  let evenLine = " *";
+  for (i = 1; i < num; i++) {
+    oddLine += "* ";
+    evenLine += " *";
+  }
+  for (i = 1; i <= num; i++) {
+    if (i % 2 == 1) {
+      console.log(oddLine);
+    } else if (i % 2 == 0) {
+      console.log(evenLine);
+    }
+  }
+}
+checkerboard(5);
 
 ////////////////////////////////
 //  TwoDArray
