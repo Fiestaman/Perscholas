@@ -1,13 +1,9 @@
 function minusOne(num) {
-  if (typeof num == "number") {
-    console.log(num - 1);
-  } else {
-    console.log(num);
-  }
+  console.log(num - 1);
 }
 minusOne(10);
 minusOne(100);
-minusOne("infinity");
+minusOne(Infinity);
 
 function makeSentence(s1, s2, s3) {
   console.log("Oh boy, do " + s1 + " " + s2 + " " + s3 + " or what?");
