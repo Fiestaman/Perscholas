@@ -97,7 +97,7 @@ let sliced = favMovies.slice(Math.floor(favMovies.length / 2));
 console.log(sliced); // slice returns the elements in the last half of array
 // then we store that value into the variable sliced
 console.log(favMovies);
-console.log(favMovies.indexOf("Fast and Furious"));
+console.log(favMovies.indexOf("Volver"));
 // indexOf returns -1 if parameter not found in array
 // const will only prevent changes that involve changing array size
 
@@ -117,6 +117,18 @@ console.log(whereIsWaldo[2][1][1]);
 ////////////////////////////////
 //  Excited Kitten
 ////////////////////////////////
+const kittenArr = [
+  "...human...why you taking pictures of me?...",
+  "...the catnip made me do it...",
+  "...why does the red dot always get away...",
+];
+for (i = 1; i <= 20; i++) {
+  if (i % 2 == 0) {
+    console.log(kittenArr[Math.floor(Math.random() * kittenArr.length)]);
+  } else {
+    console.log(i);
+  }
+}
 
 ////////////////////////////////
 //  Find the Median
