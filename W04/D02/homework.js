@@ -189,15 +189,15 @@ const thomsCloset = [
 let kristynsShoe = kristynsCloset.shift();
 thomsCloset[2].push(kristynsShoe);
 function kOutfit() {
-  console.log(
-    `Kristyn will be wearing ${
-      kristynsCloset[Math.floor(Math.random() * kristynsCloset.length)]
-    },  ${
-      kristynsCloset[Math.floor(Math.random() * kristynsCloset.length)]
-    }, and  ${
-      kristynsCloset[Math.floor(Math.random() * kristynsCloset.length)]
-    }.`
-  );
+  let r1 = Math.floor(Math.random() * kristynsCloset.length);
+  let i1 = kristynsCloset[r1];
+  let arr1 = kristynsCloset.slice(0, r1).concat(kristynsCloset.slice(r1 + 1));
+  let r2 = Math.floor(Math.random() * (arr1.length - 1));
+  let i2 = arr1[r2];
+  let arr2 = arr1.slice(0, r2).concat(arr1.slice(r2 + 1));
+  let r3 = Math.floor(Math.random() * (arr2.length - 1));
+  let i3 = arr2[r3];
+  console.log(`Kristyn will be wearing ${i1},  ${i2}, and  ${i3}.`);
 }
 kOutfit();
 kOutfit();
