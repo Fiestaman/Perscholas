@@ -16,6 +16,7 @@ for (let i = 1; i <= 20; i++) {
 //   }
 // }
 
+// Answer changing increment expression
 for (let i = 0; i <= 200; i += 2) {
   console.log(i);
 }
@@ -186,8 +187,17 @@ const thomsCloset = [
   ],
 ];
 
+////////////////////////////////
+//  Alien Attire
+////////////////////////////////
+
 let kristynsShoe = kristynsCloset.shift();
 thomsCloset[2].push(kristynsShoe);
+
+////////////////////////////////
+//  Dress Us Up
+////////////////////////////////
+
 function kOutfit() {
   let r1 = Math.floor(Math.random() * kristynsCloset.length);
   let i1 = kristynsCloset[r1];
@@ -222,6 +232,10 @@ tOutfit();
 for (item of kristynsCloset) {
   console.log(`WHIRR: Now washing ${item}`);
 }
+
+////////////////////////////////
+//  Inventory
+////////////////////////////////
 for (i = 0; i < thomsCloset.length; i++) {
   console.log(thomsCloset[i]);
 }
