@@ -215,3 +215,13 @@ function tOutfit() {
 tOutfit();
 tOutfit();
 tOutfit();
+
+////////////////////////////////
+//  Dirty Laundry
+////////////////////////////////
+for (item of kristynsCloset) {
+  console.log(`WHIRR: Now washing ${item}`);
+}
+for (i = 0; i < thomsCloset.length; i++) {
+  console.log(thomsCloset[i]);
+}
