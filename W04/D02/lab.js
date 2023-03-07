@@ -10,7 +10,7 @@ minusOne(100);
 minusOne("infinity");
 
 function makeSentence(s1, s2, s3) {
-  console.log(`Oh boy, do ${s1} ${s2} ${s3} or what?`);
+  console.log("Oh boy, do " + s1 + " " + s2 + " " + s3 + " or what?");
 }
 
 makeSentence("I", "want", "chimichangas");
