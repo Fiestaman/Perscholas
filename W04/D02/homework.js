@@ -63,6 +63,43 @@ for (turtle of ninjaTurtles) {
 ////////////////////////////////
 // Methods, Revisited
 ////////////////////////////////
+const favMovies = [
+  "Jaws",
+  "The Fellowship of the Ring",
+  "Howl's Moving Castle",
+  "Django Unchained",
+  "Cloud Atlas",
+  "The Usual Suspects",
+  "Toy Story",
+  "Conan the Barbarian",
+  "Titanic",
+  "Harry Potter",
+  "Fried Green Tomatoes",
+  "Volver",
+  "Oculus",
+  "Seven",
+  "Black Panther",
+  "Harry Potter",
+  "Imitation of Life",
+  "Snatch",
+  "Fast and Furious",
+];
+console.log(favMovies.indexOf("Titanic"));
+favMovies.sort(); // Mutates the array in place
+favMovies.pop();
+favMovies.push("Guardians of the Galaxy");
+favMovies.reverse();
+console.log(favMovies);
+favMovies.shift();
+favMovies.unshift(); // returns length of new array
+favMovies.splice(favMovies.indexOf("Django Unchained"), 1, "Avatar"); // does not alter our array
+let sliced = favMovies.slice(Math.floor(favMovies.length / 2));
+console.log(sliced); // slice returns the elements in the last half of array
+// then we store that value into the variable sliced
+console.log(favMovies);
+console.log(favMovies.indexOf("Fast and Furious"));
+// indexOf returns -1 if parameter not found in array
+// const will only prevent changes that involve changing array size
 
 ////////////////////////////////
 // Where is Waldo
