@@ -145,3 +145,73 @@ if (nums.length % 2 == 1) {
   let medianNumber = (nums[nums.length / 2] + nums[nums.length / 2 + 1]) / 2;
   console.log(medianNumber);
 }
+
+////////////////////////////////
+//  Hungry for More
+////////////////////////////////
+
+////////////////////////////////
+//  Return of the Closets
+////////////////////////////////
+const kristynsCloset = [
+  "left shoe",
+  "cowboy boots",
+  "right sock",
+  "Per Scholas hoodie",
+  "green pants",
+  "yellow knit hat",
+  "marshmallow peeps",
+];
+
+// Thom's closet is more complicated. Check out this nested data structure!!
+const thomsCloset = [
+  [
+    // These are Thom's shirts
+    "grey button-up",
+    "dark grey button-up",
+    "light blue button-up",
+    "blue button-up",
+  ],
+  [
+    // These are Thom's pants
+    "grey jeans",
+    "jeans",
+    "PJs",
+  ],
+  [
+    // Thom's accessories
+    "wool mittens",
+    "wool scarf",
+    "raybans",
+  ],
+];
+
+let kristynsShoe = kristynsCloset.shift();
+thomsCloset[2].push(kristynsShoe);
+function kOutfit() {
+  console.log(
+    `Kristyn will be wearing ${
+      kristynsCloset[Math.floor(Math.random() * kristynsCloset.length)]
+    },  ${
+      kristynsCloset[Math.floor(Math.random() * kristynsCloset.length)]
+    }, and  ${
+      kristynsCloset[Math.floor(Math.random() * kristynsCloset.length)]
+    }.`
+  );
+}
+kOutfit();
+kOutfit();
+kOutfit();
+
+function tOutfit() {
+  console.log(
+    `Thom will be wearing ${
+      thomsCloset[0][Math.floor(Math.random() * thomsCloset.length)]
+    },  ${
+      thomsCloset[1][Math.floor(Math.random() * thomsCloset.length)]
+    }, and  ${thomsCloset[2][Math.floor(Math.random() * thomsCloset.length)]}.`
+  );
+}
+tOutfit();
+tOutfit();
+tOutfit();
