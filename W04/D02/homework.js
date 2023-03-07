@@ -133,3 +133,15 @@ for (i = 1; i <= 20; i++) {
 ////////////////////////////////
 //  Find the Median
 ////////////////////////////////
+const nums = [
+  14, 11, 16, 15, 13, 16, 15, 17, 19, 11, 12, 14, 19, 11, 15, 17, 11, 18, 12,
+  17, 12, 71, 18, 15, 12, 13,
+];
+nums.sort();
+if (nums.length % 2 == 1) {
+  let medianNumber = nums[Math.ceil(nums.length / 2)];
+  console.log(medianNumber);
+} else if (nums.length % 2 == 0) {
+  let medianNumber = (nums[nums.length / 2] + nums[nums.length / 2 + 1]) / 2;
+  console.log(medianNumber);
+}
