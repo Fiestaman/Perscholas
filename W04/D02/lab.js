@@ -1,14 +1,26 @@
 function minusOne(num) {
   if (typeof num == "number") {
-    return num - 1;
+    console.log(num - 1);
   } else {
-    return num;
+    console.log(num);
   }
 }
-// console.log(minusOne("infinity"));
+minusOne(10);
+minusOne(100);
+minusOne("infinity");
 
 function makeSentence(s1, s2, s3) {
-  console.log(`Hello ${s1}, here are the ${s2} ${s3} that you ordered.`);
+  console.log(`Oh boy, do ${s1} ${s2} ${s3} or what?`);
 }
 
-// makeSentence("Jenny", "blue", "pants");
+makeSentence("I", "want", "chimichangas");
+
+function getLastElement(arr) {
+  console.log(arr[arr.length - 1]);
+}
+getLastElement([1, 2, 3, 4, 5, 6]);
+getLastElement(["a", "b", "c"]);
+getLastElement([
+  [1, 2, 3],
+  [4, 5, 6],
+]);
