@@ -57,7 +57,7 @@ wolfy.splice(0, 1, "Gameboy");
 // Yell at the Ninja Turtles
 ////////////////////////////////
 let ninjaTurtles = ["Donatello", "Leonardo", "Raphael", "Michaelangelo"];
-for (turtle of ninjaTurtles) {
+for (let turtle of ninjaTurtles) {
   console.log(turtle.toUpperCase());
 }
 
@@ -123,7 +123,7 @@ const kittenArr = [
   "...the catnip made me do it...",
   "...why does the red dot always get away...",
 ];
-for (i = 1; i <= 20; i++) {
+for (let i = 1; i <= 20; i++) {
   if (i % 2 == 0) {
     console.log(kittenArr[Math.floor(Math.random() * kittenArr.length)]);
   } else {
@@ -157,7 +157,7 @@ if (nums.length % 2 == 1) {
 function fibonacci(num) {
   let sum = 1;
   let prevNum = 0;
-  for (i = 1; i < num; i++) {
+  for (let i = 1; i < num; i++) {
     sum += prevNum;
     prevNum = sum - prevNum;
   }
@@ -171,11 +171,11 @@ console.log(fibonacci(6));
 function checkerboard(num) {
   let oddLine = "* ";
   let evenLine = " *";
-  for (i = 1; i < num; i++) {
+  for (let i = 1; i < num; i++) {
     oddLine += "* ";
     evenLine += " *";
   }
-  for (i = 1; i <= num; i++) {
+  for (let i = 1; i <= num; i++) {
     if (i % 2 == 1) {
       console.log(oddLine);
     } else if (i % 2 == 0) {
@@ -276,13 +276,13 @@ tOutfit();
 ////////////////////////////////
 //  Dirty Laundry
 ////////////////////////////////
-for (item of kristynsCloset) {
+for (let item of kristynsCloset) {
   console.log(`WHIRR: Now washing ${item}`);
 }
 
 ////////////////////////////////
 //  Inventory
 ////////////////////////////////
-for (i = 0; i < thomsCloset.length; i++) {
+for (let i = 0; i < thomsCloset.length; i++) {
   console.log(thomsCloset[i]);
 }
