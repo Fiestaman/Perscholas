@@ -188,6 +188,15 @@ checkerboard(5);
 ////////////////////////////////
 //  TwoDArray
 ////////////////////////////////
+function diagonalDifference(arr) {
+  // Write your code here
+  let sum = 0;
+  for (let i = 0; i < arr.length; i++) {
+    sum += arr[i][i];
+    sum -= arr[i][arr.length - 1 - i];
+  }
+  return Math.abs(sum);
+}
 
 ////////////////////////////////
 //  Return of the Closets
