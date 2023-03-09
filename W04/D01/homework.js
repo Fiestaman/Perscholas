@@ -38,16 +38,16 @@ class Person {
   greet() {
     console.log(`Hello, ${this.name}! How are you today?`);
   }
-  eat(meals) {
+  eat(meals = 1) {
     this.weight += meals;
     this.mood += meals;
     console.log(`${this.name} ate ${meals} meals and feels better.`);
   }
-  exercise(reps) {
+  exercise(reps = 1) {
     this.weight -= reps;
     console.log(`${this.name} worked out ${reps} times and lost some weight.`);
   }
-  ageUp(years) {
+  ageUp(years = 1) {
     this.age += years;
     this.height += years;
     this.weight += years;
