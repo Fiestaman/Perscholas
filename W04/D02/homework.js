@@ -100,7 +100,6 @@ console.log(sliced); // slice returns the elements in the last half of array
 console.log(favMovies);
 console.log(favMovies.indexOf("Volver"));
 // indexOf returns -1 if parameter not found in array
-// const will only prevent changes that involve changing array size
 
 ////////////////////////////////
 // Where is Waldo
