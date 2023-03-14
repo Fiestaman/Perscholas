@@ -1,0 +1,21 @@
+#paintbrush {
+  height: 100px;
+  width: 100px;
+  border: 1px solid black;
+}
+/* body {
+  line-height: 0;
+} */
+
+#canvas {
+  border: 1px solid black;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.box {
+  height: 10px;
+  width: 10px;
+  /* display: inline-block; */
+  border: 1px solid black;
+}
