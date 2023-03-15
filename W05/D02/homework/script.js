@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   // Let's add to DOM's Past Races list. Create a new <li> element, change
   // the new <li> text to the name of a city, and append it to the Past Races
   // list.
-  const newEl = document.createElement("a");
+  const newEl = document.createElement("li");
   const paris = "Paris";
   newEl.textContent = paris;
   past.appendChild(newEl);
@@ -78,7 +78,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
   const newP = document.createElement("p");
   newP.innerText = "I DROVE UNDER THE EIFFEL TOWER!!";
   newBP.appendChild(newP);
-  console.log(document.querySelector("main"));
   document.querySelector(".main").appendChild(newBP);
 
   // Part 8
