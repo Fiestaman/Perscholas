@@ -110,14 +110,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
         return;
       }
       e.target.classList.toggle("red");
-      e.target.classList.toggle("purple");
+      e.target.classList.toggle("purple"); // not necessary as red supersedes
+      // purple and we always want at least a purple background. would be needed
+      // if all blog posts didn't already have purple class
     });
     a.addEventListener("mouseenter", (e) => {
       if (a !== e.target) {
         return;
       }
       e.target.classList.toggle("red");
-      e.target.classList.toggle("purple");
+      e.target.classList.toggle("purple"); // see above
     });
   }
 });
