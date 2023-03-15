@@ -171,6 +171,12 @@ topMenuEl.addEventListener("click", (e) => {
   } else {
     subMenuEl.style.top = 0;
   }
+
+  // Task 6.4
+  // If the ABOUT link is clicked, an <h1>about</h1>should be displayed.
+  if (e.target.textContent == "about") {
+    mainEl.innerHTML = `<h1>${e.target.textContent}</h1>`;
+  }
 });
 
 // Task 5.8
