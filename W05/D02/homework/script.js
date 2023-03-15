@@ -109,6 +109,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
       if (a !== e.target) {
         return;
       }
+      e.target.classList.toggle("red");
       e.target.classList.toggle("purple");
     });
     a.addEventListener("mouseenter", (e) => {
@@ -116,6 +117,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         return;
       }
       e.target.classList.toggle("red");
+      e.target.classList.toggle("purple");
     });
   }
 });
