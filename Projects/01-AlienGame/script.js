@@ -5,16 +5,13 @@ const ship = {
   accuracy: 0.7,
 };
 
-class AlienFleet {
-  constructor() {
-    this.aliens = [];
-  }
-
-  create() {
+const alienFleet = {
+  aliens: [],
+  create: function () {
     const newAlien = new Alien();
     this.aliens.push(newAlien);
-  }
-}
+  },
+};
 
 class Alien {
   constructor() {
@@ -26,9 +23,11 @@ class Alien {
   static num = 1;
 }
 
-// for (let i=1;i<=6;i++) {
+for (let i = 1; i <= 6; i++) {
+  alienFleet.create();
+}
 
-// }
+// console.log(alienFleet);
 
 // let target =
 // // ship attack
