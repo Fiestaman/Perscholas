@@ -29,9 +29,17 @@ for (let i = 1; i <= 6; i++) {
 
 // console.log(alienFleet);
 
-// let target =
-// // ship attack
-// if (Math.random() < ship.accuracy) {
-
-// 	console.log(`Alien has been hit!`);
-// }
+let target = alienFleet.aliens[0];
+// ship attack
+if (ship.accuracy >= Math.random()) {
+  target.hull -= ship.firepower;
+  if (target.hull <= 0) {
+    console.log(`${target.name} has been destroyed.`);
+  } else if (target.hull > 0) {
+    console.log(
+      `${target.name} has been hit and has ${target.hull} hull remaining!`
+    );
+  }
+} else {
+  console.log(`You missed!`);
+}
