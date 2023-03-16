@@ -35,6 +35,18 @@ if (ship.accuracy >= Math.random()) {
   target.hull -= ship.firepower;
   if (target.hull <= 0) {
     console.log(`${target.name} has been destroyed.`);
+    const prompt = window.prompt(
+      "Enter retreat to retreat or attack to attack the next ship."
+    );
+    if (prompt.toLowerCase == "retreat") {
+      console.log("You retreat to fight another day.");
+      return;
+    } else if (prompt.toLowerCase == "attack") {
+      // continue loop to start attack cycle over
+    } else {
+      console.log("Invalid response. Shutting down ship.");
+      return;
+    }
   } else if (target.hull > 0) {
     console.log(
       `${target.name} has been hit and has ${target.hull} hull remaining!`
