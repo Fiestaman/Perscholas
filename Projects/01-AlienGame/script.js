@@ -85,16 +85,25 @@ while (ship.hull > 0) {
   } else {
     console.log(`You missed!`);
   }
-
+  const shield = Math.floor(Math.random() * 3 + 1);
+  console.log(
+    `Your shields fluctuate and provide ${shield} hull points. You now have ${
+      shield + ship.hull
+    } hull points.`
+  );
   let attacker = alienFleet.aliens[0];
   // alien attack
   console.log(`${attacker.name} fires its lasers.`);
   if (attacker.accuracy >= Math.random()) {
-    ship.hull -= attacker.firepower;
+    ship.hull -= attacker.firepower - shield;
     if (ship.hull <= 0) {
       console.log(`Your ship has been destroyed. Earth is doomed! You lose.`);
     } else if (ship.hull > 0) {
-      console.log(`You have been hit and have ${ship.hull} hull remaining!`);
+      console.log(
+        `Your hull was hit by ${
+          attacker.firepower - shield
+        } spillover damage and has ${ship.hull} hull remaining!`
+      );
     }
   } else {
     console.log(`${attacker.name} missed!`);
