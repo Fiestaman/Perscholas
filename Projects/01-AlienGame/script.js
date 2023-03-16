@@ -43,3 +43,15 @@ if (ship.accuracy >= Math.random()) {
 } else {
   console.log(`You missed!`);
 }
+
+// alien attack
+if (ship.accuracy >= Math.random()) {
+  ship.hull -= target.firepower;
+  if (ship.hull <= 0) {
+    console.log(`Your ship has been destroyed. Earth is doomed! You lose.`);
+  } else if (ship.hull > 0) {
+    console.log(`You have been hit and have ${ship.hull} hull remaining!`);
+  }
+} else {
+  console.log(`${target.name} missed!`);
+}
