@@ -5,6 +5,17 @@ const ship = {
   accuracy: 0.7,
 };
 
+class AlienFleet {
+  constructor() {
+    this.aliens = [];
+  }
+
+  create() {
+    const newAlien = new Alien();
+    this.aliens.push(newAlien);
+  }
+}
+
 class Alien {
   constructor() {
     this.name = `Alien${Alien.num++}`;
@@ -14,5 +25,14 @@ class Alien {
   }
   static num = 1;
 }
-// console.log(new Alien());
-// console.log(new Alien());
+
+// for (let i=1;i<=6;i++) {
+
+// }
+
+// let target =
+// // ship attack
+// if (Math.random() < ship.accuracy) {
+
+// 	console.log(`Alien has been hit!`);
+// }
