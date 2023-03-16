@@ -23,9 +23,14 @@ class Alien {
   static num = 1;
 }
 
-for (let i = 1; i <= 6; i++) {
+const attackers = Math.floor(Math.random() * 5) + 4;
+for (let i = 1; i <= attackers; i++) {
   alienFleet.create();
 }
+
+console.log(
+  `There are ${attackers} alien ships attacking Earth! Take them down!`
+);
 
 // console.log(alienFleet);
 while (ship.hull > 0) {
