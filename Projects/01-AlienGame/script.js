@@ -29,6 +29,7 @@ class Alien {
     this.hull = Math.floor(Math.random() * 4) + 3;
     this.firepower = Math.floor(Math.random() * 3) + 2;
     this.accuracy = Math.random() * 0.2 + 0.6;
+    this.points = 50;
   }
   static num = 1;
 }
@@ -41,6 +42,7 @@ class Mega {
     this.hull = Math.floor(Math.random() * 3) + 8;
     this.firepower = Math.floor(Math.random() * 6) + 4;
     this.accuracy = Math.random() * 0.2 + 0.6;
+    this.points = 100;
   }
   createPod() {
     const newPod = new Pod();
@@ -53,6 +55,7 @@ class Pod {
   constructor() {
     this.name = `Pod${Pod.num++}`;
     this.hull = 4;
+    this.points = 25;
   }
   static num = 1;
 }
@@ -69,6 +72,8 @@ function getRandom(arr, n) {
   }
   return result;
 }
+
+let score = 0;
 
 playGame();
 
@@ -148,6 +153,7 @@ function playRound() {
       target.hull -= ship.firepower;
       if (target.hull <= 0) {
         console.log(`${target.name} was hit and has been destroyed.`);
+        score += target.points;
         // console.log(target);
         if (target instanceof Alien || target instanceof Mega) {
           alienFleet.aliens.splice(targetNum - 1, 1);
@@ -247,6 +253,7 @@ function playRound() {
           attacker.firepower - shield > 0 ? attacker.firepower - shield : 0;
         if (ship.hull <= 0) {
           console.log(`Your ship has been destroyed. Earth is doomed!`);
+          console.log(`You scored ${score} points. Great job!`);
           break;
         } else if (ship.hull > 0) {
           console.log(
@@ -265,6 +272,9 @@ function playRound() {
 
 // start game functionality
 function playGame() {
+  // score functionality
+  score = 0;
+
   // ship creation
   ship = {
     name: "USS Assembly",
