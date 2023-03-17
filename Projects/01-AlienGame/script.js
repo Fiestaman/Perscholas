@@ -24,14 +24,27 @@ class Alien {
   static num = 1;
 }
 
+// random array generator
+function getRandom(arr, n) {
+  let result = new Array(n),
+    len = arr.length,
+    taken = new Array(len);
+  while (n--) {
+    let x = Math.floor(Math.random() * len);
+    result[n] = arr[x in taken ? taken[x] : x];
+    taken[x] = --len in taken ? taken[len] : len;
+  }
+  return result;
+}
+
 // random # of attackers generator
-const attackers = Math.floor(Math.random() * 5) + 4;
-for (let i = 1; i <= attackers; i++) {
+const numOfAttackers = Math.floor(Math.random() * 5) + 4;
+for (let i = 1; i <= numOfAttackers; i++) {
   alienFleet.create();
 }
 
 console.log(
-  `There are ${attackers} alien ships attacking Earth! Take them down!`
+  `There are ${numOfAttackers} alien ships attacking Earth! Take them down!`
 );
 
 while (ship.hull > 0) {
@@ -117,29 +130,78 @@ while (ship.hull > 0) {
     console.log(`You missed!`);
   }
 
-  // shield functionality
-  const shield = Math.floor(Math.random() * 3 + 1);
-  console.log(
-    `Your shields fluctuate and provide ${shield} hull points. You now have ${
-      shield + ship.hull
-    } hull points.`
-  );
-  let attacker = alienFleet.aliens[0];
+  // multiple attackers funtionality
+  let attackers = [];
+  const attackerNum = Math.random();
+  if (attackerNum >= 0.95) {
+    attackers = alienFleet.aliens;
+    console.log(`You're attacked by all alien ships at once.`);
+  } else if (attackerNum >= 0.8 && attackerNum < 0.95) {
+    let n = 3;
+    if (n > alienFleet.aliens.length) {
+      n = alienFleet.aliens.length;
+    }
+    attackers = getRandom(alienFleet.aliens, n);
+    let attackersNamesArr = [];
+    for (let attacker of attackers) {
+      if (attacker.hasOwnProperty("name")) {
+        attackersNamesArr.push(attacker.name);
+      }
+    }
+    console.log(`You're attacked by: ${attackersNamesArr.join(", ")}`);
+  } else if (attackerNum >= 0.5 && attackerNum < 0.8) {
+    let n = 2;
+    if (n > alienFleet.aliens.length) {
+      n = alienFleet.aliens.length;
+    }
+    attackers = getRandom(alienFleet.aliens, n);
+    let attackersNamesArr = [];
+    for (let attacker of attackers) {
+      if (attacker.hasOwnProperty("name")) {
+        attackersNamesArr.push(attacker.name);
+      }
+    }
+    console.log(`You're attacked by: ${attackersNamesArr.join(", ")}`);
+  } else {
+    attackers = [
+      alienFleet.aliens[Math.floor(Math.random() * alienFleet.aliens.length)],
+    ];
+    console.log(`You're attacked by: ${attackers[0].name}`);
+  }
 
-  // alien attack turn
-  console.log(`${attacker.name} fires its lasers.`);
-  if (attacker.accuracy >= Math.random()) {
-    ship.hull -= attacker.firepower - shield;
-    if (ship.hull <= 0) {
-      console.log(`Your ship has been destroyed. Earth is doomed! You lose.`);
-    } else if (ship.hull > 0) {
+  // shield functionality
+  let shield = Math.floor(Math.random() * 3 + 1);
+
+  for (let attacker of attackers) {
+    if (shield > 0) {
       console.log(
-        `Your hull was hit by ${
-          attacker.firepower - shield
-        } spillover damage and has ${ship.hull} hull remaining!`
+        `Your shields fluctuate and provide ${shield} hull points. You now have ${
+          shield + ship.hull
+        } hull points.`
+      );
+    } else {
+      shield = 0;
+      console.log(
+        `Your shields have failed. You now have ${ship.hull} hull points.`
       );
     }
-  } else {
-    console.log(`${attacker.name} missed!`);
+
+    // alien attack turn
+    console.log(`${attacker.name} fires its lasers.`);
+    if (attacker.accuracy >= Math.random()) {
+      ship.hull -= attacker.firepower - shield;
+      if (ship.hull <= 0) {
+        console.log(`Your ship has been destroyed. Earth is doomed! You lose.`);
+      } else if (ship.hull > 0) {
+        console.log(
+          `Your hull was hit by ${attacker.firepower - shield} damage and has ${
+            ship.hull
+          } hull remaining!`
+        );
+      }
+      shield = 0;
+    } else {
+      console.log(`${attacker.name} missed!`);
+    }
   }
 }
