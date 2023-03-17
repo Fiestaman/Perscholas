@@ -1,3 +1,4 @@
+// ship creation
 const ship = {
   name: "USS Assembly",
   hull: 20,
@@ -6,20 +7,52 @@ const ship = {
   missiles: 3,
 };
 
+// alienFleet creation
 const alienFleet = {
   aliens: [],
-  create: function () {
+  createAlien: function () {
     const newAlien = new Alien();
     this.aliens.push(newAlien);
   },
+  createMega: function () {
+    const newMega = new Mega();
+    newMega.createPod();
+    newMega.createPod();
+    this.aliens.push(newMega);
+  },
 };
 
+// Alien class
 class Alien {
   constructor() {
     this.name = `Alien${Alien.num++}`;
     this.hull = Math.floor(Math.random() * 4) + 3;
     this.firepower = Math.floor(Math.random() * 3) + 2;
     this.accuracy = Math.random() * 0.2 + 0.6;
+  }
+  static num = 1;
+}
+
+// Mega class
+class Mega {
+  constructor() {
+    this.name = "Mega-ship";
+    this.pods = [];
+    this.hull = Math.floor(Math.random() * 3) + 8;
+    this.firepower = Math.floor(Math.random() * 6) + 4;
+    this.accuracy = Math.random() * 0.2 + 0.6;
+  }
+  createPod() {
+    const newPod = new Pod();
+    this.pods.push(newPod);
+  }
+}
+
+// Pod class
+class Pod {
+  constructor() {
+    this.name = `Pod${Pod.num++}`;
+    this.hull = 4;
   }
   static num = 1;
 }
@@ -40,11 +73,14 @@ function getRandom(arr, n) {
 // random # of attackers generator
 const numOfAttackers = Math.floor(Math.random() * 5) + 4;
 for (let i = 1; i <= numOfAttackers; i++) {
-  alienFleet.create();
+  alienFleet.createAlien();
 }
 
+// add Mega-ship to fleet
+alienFleet.createMega();
+
 console.log(
-  `There are ${numOfAttackers} alien ships attacking Earth! Take them down!`
+  `There are ${numOfAttackers + 1} alien ships attacking Earth! Take them down!`
 );
 
 while (ship.hull > 0) {
@@ -99,10 +135,19 @@ while (ship.hull > 0) {
   // ship attack turn
   console.log(`You fire your lasers.`);
   if (ship.accuracy >= Math.random()) {
+    console.log(target);
+    if (target.pods[0] != undefined && target instanceof Mega) {
+      target = target.pods[0];
+    }
     target.hull -= ship.firepower;
     if (target.hull <= 0) {
       console.log(`${target.name} was hit and has been destroyed.`);
-      alienFleet.aliens.splice(targetNum - 1, 1);
+      // console.log(target);
+      if (target instanceof Alien) {
+        alienFleet.aliens.splice(targetNum - 1, 1);
+      } else if (target instanceof Pod) {
+        alienFleet.aliens[targetNum - 1].pods.shift();
+      }
       if (!alienFleet.aliens[0]) {
         console.log(
           `The entire alien fleet has been destroyed. Earth is saved!`
@@ -192,6 +237,7 @@ while (ship.hull > 0) {
       ship.hull -= attacker.firepower - shield;
       if (ship.hull <= 0) {
         console.log(`Your ship has been destroyed. Earth is doomed! You lose.`);
+        break;
       } else if (ship.hull > 0) {
         console.log(
           `Your hull was hit by ${attacker.firepower - shield} damage and has ${
