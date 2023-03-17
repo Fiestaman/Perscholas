@@ -76,6 +76,7 @@ function getRandom(arr, n) {
 }
 
 let score = 0;
+let round = 1;
 
 playGame();
 
@@ -90,6 +91,21 @@ function playRound() {
 
   // add Mega-ship to fleet
   alienFleet.createMega();
+
+  // stronger enemy functionality
+  for (let i = 1; i < round; i++) {
+    for (let alien of alienFleet.aliens) {
+      alien.hull = Math.floor(alien.hull * 1.5);
+      alien.firepower = Math.floor(alien.firepower * 1.5);
+      alien.points *= 2;
+    }
+  }
+
+  // stronger ship functionality
+  for (let i = 1; i < round; i++) {
+    ship.hull = Math.floor(ship.hull * 1.75);
+    ship.firepower = Math.floor(ship.firepower * 1.75);
+  }
 
   console.log(
     `There are ${
@@ -274,10 +290,13 @@ function playRound() {
 
 // start game functionality
 function playGame() {
-  // score functionality
+  // reset score
   score = 0;
 
-  // ship creation
+  // reset round
+  round = 1;
+
+  // reset ship stats
   ship = {
     name: "USS Assembly",
     hull: 20,
@@ -288,6 +307,7 @@ function playGame() {
   };
 
   playRound();
+
   // replay functionality
   let replay = window.prompt("Game over! Would you like to play again? Y/N?");
   if (replay.toLowerCase() == "yes" || replay.toLowerCase() == "y") {
