@@ -5,6 +5,8 @@ let ship = {
   firepower: 5,
   accuracy: 0.7,
   missiles: 3,
+  // shield functionality
+  shield: Math.floor(Math.random() * 6) + 6,
 };
 
 // alienFleet creation
@@ -128,9 +130,7 @@ function playRound() {
         );
         alienFleet.aliens.splice(targetNum - 1, 1);
         if (!alienFleet.aliens[0]) {
-          console.log(
-            `The entire alien fleet has been destroyed. Earth is saved!`
-          );
+          recharge();
           break;
         }
         continue;
@@ -145,7 +145,7 @@ function playRound() {
     }
 
     // ship attack turn
-    console.log(`You fire your lasers.`);
+    console.log(`You fire your lasers with ${ship.firepower} firepower.`);
     if (ship.accuracy >= Math.random()) {
       if (target instanceof Mega && target.pods[0] != undefined) {
         target = target.pods[0];
@@ -161,10 +161,8 @@ function playRound() {
           alienFleet.aliens[targetNum - 1].pods.shift();
         }
         if (!alienFleet.aliens[0]) {
-          console.log(
-            "All the alien ships have been destroyed but they called in reinforcements."
-          );
-          playRound();
+          recharge();
+          break;
         }
         const prompt = window.prompt(
           "Enter retreat or r to retreat or enter attack or a to attack another ship."
@@ -229,28 +227,29 @@ function playRound() {
       console.log(`You're attacked by: ${attackers[0].name}`);
     }
 
-    // shield functionality
-    let shield = Math.floor(Math.random() * 3 + 1);
-
     for (let attacker of attackers) {
-      if (shield > 0) {
+      if (ship.shield > 0) {
         console.log(
-          `Your shields fluctuate and provide ${shield} hull points. You now have ${
-            shield + ship.hull
-          } hull points.`
+          `Your shields are holding and provide ${
+            ship.shield
+          } hull points. You now have ${ship.shield + ship.hull} hull points.`
         );
       } else {
-        shield = 0;
+        ship.shield = 0;
         console.log(
           `Your shields have failed. You now have ${ship.hull} hull points.`
         );
       }
 
       // alien attack turn
-      console.log(`${attacker.name} fires its lasers.`);
+      console.log(
+        `${attacker.name} fires its lasers with ${attacker.firepower} firepower.`
+      );
       if (attacker.accuracy >= Math.random()) {
         ship.hull -=
-          attacker.firepower - shield > 0 ? attacker.firepower - shield : 0;
+          attacker.firepower - ship.shield > 0
+            ? attacker.firepower - ship.shield
+            : 0;
         if (ship.hull <= 0) {
           console.log(`Your ship has been destroyed. Earth is doomed!`);
           console.log(`You scored ${score} points. Great job!`);
@@ -258,11 +257,14 @@ function playRound() {
         } else if (ship.hull > 0) {
           console.log(
             `Your hull was hit by ${
-              attacker.firepower - shield > 0 ? attacker.firepower - shield : 0
+              attacker.firepower - ship.shield > 0
+                ? attacker.firepower - ship.shield
+                : 0
             } damage and has ${ship.hull} hull remaining!`
           );
         }
-        shield = 0;
+        ship.shield -= attacker.firepower;
+        ship.shield = ship.shield > 0 ? ship.shield : 0;
       } else {
         console.log(`${attacker.name} missed!`);
       }
@@ -282,6 +284,7 @@ function playGame() {
     firepower: 5,
     accuracy: 0.7,
     missiles: 3,
+    shield: Math.floor(Math.random() * 6) + 6,
   };
 
   playRound();
@@ -293,4 +296,26 @@ function playGame() {
   } else {
     return;
   }
+}
+
+// recharge shields functionality
+function recharge() {
+  let recharge = window.prompt(
+    "Do you want to return to base to recharge shields? Y/N?"
+  );
+  if (recharge.toLowerCase() == "y" || recharge.toLowerCase() == "yes") {
+    ship.shield = Math.floor(Math.random() * 5 + 6);
+    console.log(
+      `You return to base and recharge your shields to ${ship.shield}.`
+    );
+  } else if (recharge.toLowerCase() == "n" || recharge.toLowerCase() == "no") {
+    console.log("You bravely continue on without recharging shields.");
+  } else {
+    console.log("Invalid response. Shutting down ship.");
+    return;
+  }
+  console.log(
+    "All the alien ships have been destroyed but they called in reinforcements."
+  );
+  playRound();
 }
