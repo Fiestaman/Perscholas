@@ -1,5 +1,5 @@
 // ship creation
-const ship = {
+let ship = {
   name: "USS Assembly",
   hull: 20,
   firepower: 5,
@@ -72,9 +72,11 @@ function getRandom(arr, n) {
 
 playGame();
 
-function playGame() {
+// round functionality
+function playRound() {
   // random # of attackers generator
-  const numOfAttackers = Math.floor(Math.random() * 5) + 4;
+  alienFleet.aliens = [];
+  let numOfAttackers = Math.floor(Math.random() * 4) + 3;
   for (let i = 1; i <= numOfAttackers; i++) {
     alienFleet.createAlien();
   }
@@ -140,7 +142,6 @@ function playGame() {
     // ship attack turn
     console.log(`You fire your lasers.`);
     if (ship.accuracy >= Math.random()) {
-      console.log(target);
       if (target instanceof Mega && target.pods[0] != undefined) {
         target = target.pods[0];
       }
@@ -148,24 +149,27 @@ function playGame() {
       if (target.hull <= 0) {
         console.log(`${target.name} was hit and has been destroyed.`);
         // console.log(target);
-        if (target instanceof Alien) {
+        if (target instanceof Alien || target instanceof Mega) {
           alienFleet.aliens.splice(targetNum - 1, 1);
         } else if (target instanceof Pod) {
           alienFleet.aliens[targetNum - 1].pods.shift();
         }
         if (!alienFleet.aliens[0]) {
           console.log(
-            `The entire alien fleet has been destroyed. Earth is saved!`
+            "All the alien ships have been destroyed but they called in reinforcements."
           );
-          break;
+          playRound();
         }
         const prompt = window.prompt(
-          "Enter retreat to retreat or attack to attack another ship."
+          "Enter retreat or r to retreat or enter attack or a to attack another ship."
         );
-        if (prompt.toLowerCase() == "retreat") {
+        if (prompt.toLowerCase() == "retreat" || prompt.toLowerCase() == "r") {
           console.log("You retreat to fight another day.");
           break;
-        } else if (prompt.toLowerCase() == "attack") {
+        } else if (
+          prompt.toLowerCase() == "attack" ||
+          prompt.toLowerCase() == "a"
+        ) {
           continue;
         } else {
           console.log("Invalid response. Shutting down ship.");
@@ -239,16 +243,15 @@ function playGame() {
       // alien attack turn
       console.log(`${attacker.name} fires its lasers.`);
       if (attacker.accuracy >= Math.random()) {
-        ship.hull -= attacker.firepower - shield;
+        ship.hull -=
+          attacker.firepower - shield > 0 ? attacker.firepower - shield : 0;
         if (ship.hull <= 0) {
-          console.log(
-            `Your ship has been destroyed. Earth is doomed! You lose.`
-          );
+          console.log(`Your ship has been destroyed. Earth is doomed!`);
           break;
         } else if (ship.hull > 0) {
           console.log(
             `Your hull was hit by ${
-              attacker.firepower - shield
+              attacker.firepower - shield > 0 ? attacker.firepower - shield : 0
             } damage and has ${ship.hull} hull remaining!`
           );
         }
@@ -258,7 +261,20 @@ function playGame() {
       }
     }
   }
+}
 
+// start game functionality
+function playGame() {
+  // ship creation
+  ship = {
+    name: "USS Assembly",
+    hull: 20,
+    firepower: 5,
+    accuracy: 0.7,
+    missiles: 3,
+  };
+
+  playRound();
   // replay functionality
   let replay = window.prompt("Game over! Would you like to play again? Y/N?");
   if (replay.toLowerCase() == "yes" || replay.toLowerCase() == "y") {
