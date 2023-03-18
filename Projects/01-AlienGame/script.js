@@ -6,7 +6,7 @@ let ship = {
   accuracy: 0.7,
   missiles: 3,
   // shield functionality
-  shield: Math.floor(Math.random() * 6) + 6,
+  shield: Math.floor(Math.random() * 5) + 6,
 };
 
 // alienFleet creation
@@ -115,6 +115,7 @@ function playRound() {
       }
     }
     let targetNum = window.prompt(str);
+    let target;
     if (targetNum < 1 || targetNum > alienFleet.aliens.length) {
       console.log(`Invalid target. Shutting ship down.`);
       break;
@@ -132,12 +133,12 @@ function playRound() {
         console.log(
           `Missile fired. ${target.name} destroyed. You have ${ship.missiles} missiles left.`
         );
-        score += target.score;
+        score += target.points;
         alienFleet.aliens.splice(targetNum - 1, 1);
         shipPowerup();
         if (!alienFleet.aliens[0]) {
-          recharge();
           shipStronger();
+          recharge();
           break;
         }
         continue;
@@ -145,6 +146,7 @@ function playRound() {
         fireMiss.toLowerCase() == "no" ||
         fireMiss.toLowerCase() == "n"
       ) {
+        undefined;
       } else {
         console.log(`Invalid response. Shutting ship down.`);
         break;
@@ -168,8 +170,8 @@ function playRound() {
           alienFleet.aliens[targetNum - 1].pods.shift();
         }
         if (!alienFleet.aliens[0]) {
-          recharge();
           shipStronger();
+          recharge();
           break;
         }
         const prompt = window.prompt(
@@ -210,9 +212,9 @@ function playRound() {
       attackers = getRandom(alienFleet.aliens, n);
       let attackersNamesArr = [];
       for (let attacker of attackers) {
-        if (attacker.hasOwnProperty("name")) {
-          attackersNamesArr.push(attacker.name);
-        }
+        // if (Object.prototype.hasOwnProperty.call(attacker, "name")) {
+        attackersNamesArr.push(attacker.name);
+        // }
       }
       console.log(`You're attacked by: ${attackersNamesArr.join(", ")}`);
     } else if (attackerNum >= 0.5 && attackerNum < 0.8) {
@@ -223,9 +225,9 @@ function playRound() {
       attackers = getRandom(alienFleet.aliens, n);
       let attackersNamesArr = [];
       for (let attacker of attackers) {
-        if (attacker.hasOwnProperty("name")) {
-          attackersNamesArr.push(attacker.name);
-        }
+        // if (Object.prototype.hasOwnProperty.call(attacker, "name")) {
+        attackersNamesArr.push(attacker.name);
+        // }
       }
       console.log(`You're attacked by: ${attackersNamesArr.join(", ")}`);
     } else {
@@ -314,7 +316,7 @@ function playGame() {
 // recharge shields functionality
 function recharge() {
   let recharge = window.prompt(
-    "Do you want to return to base to recharge shields? Y/N?"
+    `You currently have ${ship.shield} shield. Do you want to return to base to recharge them? Y/N?`
   );
   if (recharge.toLowerCase() == "y" || recharge.toLowerCase() == "yes") {
     ship.shield = Math.floor(Math.random() * 5 + 6);
@@ -348,15 +350,15 @@ function medal() {
 
 // stronger ship functionality
 function shipStronger() {
-  ship.hull = Math.floor(ship.hull * 1.75);
-  ship.firepower = Math.floor(ship.firepower * 1.75);
+  ship.hull = Math.floor(ship.hull * 1.25);
+  ship.firepower = Math.floor(ship.firepower * 1.25);
 }
 
 // ship powerup functionality
 function shipPowerup() {
   while (score - (powerupRank + 1) * 1000 >= 1000) {
-    ship.hull *= Math.floor(ship.hull * 2);
-    ship.firepower *= Math.floor(ship.hull * 2);
+    ship.hull = Math.floor(ship.hull * 2);
+    ship.firepower = Math.floor(ship.firepower * 2);
     console.log(
       `You scored enough points for a powerup! Your ship now has ${ship.hull} hull points and ${ship.firepower} firepower.`
     );
