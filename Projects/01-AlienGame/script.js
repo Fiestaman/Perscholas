@@ -77,6 +77,7 @@ function getRandom(arr, n) {
 
 let score = 0;
 let round = 1;
+let powerupRank = 0;
 
 playGame();
 
@@ -133,6 +134,7 @@ function playRound() {
         );
         score += target.score;
         alienFleet.aliens.splice(targetNum - 1, 1);
+        shipPowerup();
         if (!alienFleet.aliens[0]) {
           recharge();
           shipStronger();
@@ -159,7 +161,7 @@ function playRound() {
       if (target.hull <= 0) {
         console.log(`${target.name} was hit and has been destroyed.`);
         score += target.points;
-        // console.log(target);
+        shipPowerup();
         if (target instanceof Alien || target instanceof Mega) {
           alienFleet.aliens.splice(targetNum - 1, 1);
         } else if (target instanceof Pod) {
@@ -348,6 +350,18 @@ function medal() {
 function shipStronger() {
   ship.hull = Math.floor(ship.hull * 1.75);
   ship.firepower = Math.floor(ship.firepower * 1.75);
+}
+
+// ship powerup functionality
+function shipPowerup() {
+  while (score - (powerupRank + 1) * 1000 >= 1000) {
+    ship.hull *= Math.floor(ship.hull * 2);
+    ship.firepower *= Math.floor(ship.hull * 2);
+    console.log(
+      `You scored enough points for a powerup! Your ship now has ${ship.hull} hull points and ${ship.firepower} firepower.`
+    );
+    powerupRank++;
+  }
 }
 
 // stronger enemies functionality
