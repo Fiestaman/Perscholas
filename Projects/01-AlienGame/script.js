@@ -44,7 +44,7 @@ class Mega {
     this.hull = Math.floor(Math.random() * 3) + 8;
     this.firepower = Math.floor(Math.random() * 6) + 4;
     this.accuracy = Math.random() * 0.2 + 0.6;
-    this.points = 100;
+    this.points = 200;
   }
   createPod() {
     const newPod = new Pod();
@@ -57,7 +57,7 @@ class Pod {
   constructor() {
     this.name = `Pod${Pod.num++}`;
     this.hull = 4;
-    this.points = 25;
+    // this.points = 25;
   }
   static num = 1;
 }
@@ -92,20 +92,7 @@ function playRound() {
   // add Mega-ship to fleet
   alienFleet.createMega();
 
-  // stronger enemy functionality
-  for (let i = 1; i < round; i++) {
-    for (let alien of alienFleet.aliens) {
-      alien.hull = Math.floor(alien.hull * 1.5);
-      alien.firepower = Math.floor(alien.firepower * 1.5);
-      alien.points *= 2;
-    }
-  }
-
-  // stronger ship functionality
-  for (let i = 1; i < round; i++) {
-    ship.hull = Math.floor(ship.hull * 1.75);
-    ship.firepower = Math.floor(ship.firepower * 1.75);
-  }
+  enemiesStronger();
 
   console.log(
     `There are ${
@@ -144,9 +131,11 @@ function playRound() {
         console.log(
           `Missile fired. ${target.name} destroyed. You have ${ship.missiles} missiles left.`
         );
+        score += target.score;
         alienFleet.aliens.splice(targetNum - 1, 1);
         if (!alienFleet.aliens[0]) {
           recharge();
+          shipStronger();
           break;
         }
         continue;
@@ -178,6 +167,7 @@ function playRound() {
         }
         if (!alienFleet.aliens[0]) {
           recharge();
+          shipStronger();
           break;
         }
         const prompt = window.prompt(
@@ -351,5 +341,22 @@ function medal() {
     console.log("You got a bronze medal!");
   } else {
     console.log("You didn't score high enough to get a medal.");
+  }
+}
+
+// stronger ship functionality
+function shipStronger() {
+  ship.hull = Math.floor(ship.hull * 1.75);
+  ship.firepower = Math.floor(ship.firepower * 1.75);
+}
+
+// stronger enemies functionality
+function enemiesStronger() {
+  for (let i = 1; i < round; i++) {
+    for (let alien of alienFleet.aliens) {
+      alien.hull = Math.floor(alien.hull * 1.5);
+      alien.firepower = Math.floor(alien.firepower * 1.5);
+      alien.points *= 2;
+    }
   }
 }
