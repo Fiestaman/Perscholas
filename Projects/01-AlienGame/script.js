@@ -179,6 +179,8 @@ function playRound() {
         );
         if (prompt.toLowerCase() == "retreat" || prompt.toLowerCase() == "r") {
           console.log("You retreat to fight another day.");
+          console.log(`You scored ${score} points. Great job!`);
+          medal();
           break;
         } else if (
           prompt.toLowerCase() == "attack" ||
@@ -337,11 +339,11 @@ function recharge() {
 
 // medal functionality
 function medal() {
-  if (score >= 1500) {
+  if (score >= 5000) {
     console.log("You got a gold medal!");
-  } else if (score >= 1000) {
+  } else if (score >= 2500) {
     console.log("You got a silver medal!");
-  } else if (score >= 500) {
+  } else if (score >= 1000) {
     console.log("You got a bronze medal!");
   } else {
     console.log("You didn't score high enough to get a medal.");
