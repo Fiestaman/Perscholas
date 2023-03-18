@@ -269,6 +269,7 @@ function playRound() {
         if (ship.hull <= 0) {
           console.log(`Your ship has been destroyed. Earth is doomed!`);
           console.log(`You scored ${score} points. Great job!`);
+          medal();
           break;
         } else if (ship.hull > 0) {
           console.log(
@@ -338,4 +339,17 @@ function recharge() {
     "All the alien ships have been destroyed but they called in reinforcements."
   );
   playRound();
+}
+
+// medal functionality
+function medal() {
+  if (score >= 1500) {
+    console.log("You got a gold medal!");
+  } else if (score >= 1000) {
+    console.log("You got a silver medal!");
+  } else if (score >= 500) {
+    console.log("You got a bronze medal!");
+  } else {
+    console.log("You didn't score high enough to get a medal.");
+  }
 }
