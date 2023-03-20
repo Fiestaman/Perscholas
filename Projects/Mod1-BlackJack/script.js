@@ -1,6 +1,8 @@
-// initialize hands
+// initialize variables
 let pH = [];
 let dH = [];
+let balance = 100;
+let bet = 0;
 
 // random card picker
 function pickCard() {
@@ -39,7 +41,17 @@ function dealCard(player) {
   player.push(pickCard());
 }
 
+// increase bet function
+function increase(amt = 1) {
+  bet += amt;
+}
+
+// decrease bet function
+function decrease(amt = 1) {
+  bet -= amt;
+}
+
 dealHand();
-dealCard(pH);
+// dealCard(pH);
 console.log(pH, dH);
 scoreHand();
