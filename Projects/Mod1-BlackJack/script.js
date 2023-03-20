@@ -68,7 +68,14 @@ if (balance <= 0) {
   console.log(`You're bankrupt. Your highest balance was: ${maxBal}`);
 }
 
-dealHand();
-// dealCard(pH);
-console.log(pH, dH);
-scoreHand();
+// player hit function
+function hit() {
+  dealCard(ph);
+}
+
+// play round function
+function playRound() {
+  dealHand();
+  scoreHand();
+  console.log(pH, dH);
+}
