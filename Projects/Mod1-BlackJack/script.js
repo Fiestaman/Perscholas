@@ -2,7 +2,8 @@
 let pH = [];
 let dH = [];
 let balance = 100;
-let bet = 0;
+let bet = 1;
+let maxBal = 100;
 
 // random card picker
 function pickCard() {
@@ -43,12 +44,28 @@ function dealCard(player) {
 
 // increase bet function
 function increase(amt = 1) {
+  if (bet + amt > balance) {
+    `You do not have enough funds to bet that much.`;
+  }
   bet += amt;
 }
 
 // decrease bet function
 function decrease(amt = 1) {
+  if (bet + amt > balance) {
+    `You do not have enough funds to bet that much.`;
+  }
   bet -= amt;
+}
+
+// reset balance function
+function reset() {
+  balance = 100;
+}
+
+// losing parameter
+if (balance <= 0) {
+  console.log(`You're bankrupt. Your highest balance was: ${maxBal}`);
 }
 
 dealHand();
