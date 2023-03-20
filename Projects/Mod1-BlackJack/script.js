@@ -1,9 +1,15 @@
-// initialize variables
-let pH = [];
-let dH = [];
-let balance = 100;
-let bet = 1;
-let maxBal = 100;
+// initialize player and dealer objects
+let p = {
+  balance: 100,
+  bet: 1,
+  maxBal: 100,
+  hand: [],
+  pS: 0,
+};
+let d = {
+  hand: [],
+  dS: 0,
+};
 
 // random card picker
 function pickCard() {
@@ -13,33 +19,27 @@ function pickCard() {
 // deal hand function
 function dealHand() {
   for (i = 1; i <= 2; i++) {
-    pH.push(pickCard());
-    dH.push(pickCard());
+    p.hand.push(pickCard());
+    d.hand.push(pickCard());
   }
 }
 
 // compare hand values to determine winner
 function scoreHand() {
-  let pS = 0;
-  for (let i = 0; i < pH.length; i++) {
-    pS += pH[i] > 10 ? 10 : pH[i];
-  }
-  let dS = 0;
-  for (let i = 0; i < dH.length; i++) {
-    dS += dH[i] > 10 ? 10 : dH[i];
-  }
-  if (dS > pS) {
-    console.log(`Dealer had ${dS} while you had ${pS}. You lose.`);
-  } else if (pS > dS) {
-    console.log(`You had ${pS} while dealer had ${dS}. You win!`);
-  } else if (pS == dS) {
+  if (d.dS > 21) {
+    console.log(`Dealer busted. You win.`);
+  } else if (d.dS > p.pS) {
+    console.log(`Dealer had ${d.dS} while you had ${p.pS}. You lose.`);
+  } else if (p.pS > d.dS) {
+    console.log(`You had ${p.pS} while dealer had ${d.dS}. You win!`);
+  } else if (p.pS == d.dS) {
     console.log(`You push with the dealer. Bet refunded.`);
   }
 }
 
 // deal a card function
 function dealCard(player) {
-  player.push(pickCard());
+  player.hand.push(pickCard());
 }
 
 // increase bet function
@@ -60,22 +60,40 @@ function decrease(amt = 1) {
 
 // reset balance function
 function reset() {
-  balance = 100;
+  p.balance = 100;
 }
 
 // losing parameter
-if (balance <= 0) {
+if (p.balance <= 0) {
   console.log(`You're bankrupt. Your highest balance was: ${maxBal}`);
 }
 
 // player hit function
 function hit() {
-  dealCard(ph);
+  dealCard(p);
 }
 
 // play round function
 function playRound() {
+  p.pS = 0;
+  d.dS = 0;
   dealHand();
+  for (let i = 0; i < p.hand.length; i++) {
+    p.pS += p.hand[i] > 10 ? 10 : p.hand[i];
+  }
+  for (let i = 0; i < d.hand.length; i++) {
+    d.dS += d.hand[i] > 10 ? 10 : d.hand[i];
+  }
+  // if clicked element is hit
+  // hit()
+  // else if clicked element is stand
+  while (d.dS < 17) {
+    dealCard(d);
+    d.dS += d.hand[d.hand.length - 1];
+  }
+
   scoreHand();
-  console.log(pH, dH);
+  console.log(p.hand, d.hand);
 }
+
+playRound();
