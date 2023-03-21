@@ -1,0 +1,11 @@
+body {
+  width: auto;
+}
+
+.card {
+  display: block;
+  width: 50px;
+  height: 80px;
+  border: 1px solid black;
+  align-content: center;
+}
