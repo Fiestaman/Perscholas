@@ -5,7 +5,7 @@ let p = {
   maxBal: 100,
   hand: [],
   splitHand: [],
-  pS: 0,
+  hS: 0,
   sHS: 0,
   handBet: 1,
   splitHB: 1,
@@ -15,6 +15,7 @@ let d = {
   dS: 0,
 };
 let highScore = 100;
+let inRound = false;
 
 // random card picker
 function pickCard() {
@@ -31,15 +32,17 @@ function dealHand() {
 
 // compare hand values to determine winner
 function scoreHand() {
-  if (d.dS > 21) {
+  if (p.hS > 21) {
+    console.log(`You busted. You lose.`);
+  } else if (d.dS > 21) {
     console.log(`Dealer busted. You win.`);
     p.balance += p.handBet;
-  } else if (d.dS > p.pS) {
-    console.log(`Dealer had ${d.dS} while you had ${p.pS}. You lose.`);
-  } else if (p.pS > d.dS) {
-    console.log(`You had ${p.pS} while dealer had ${d.dS}. You win!`);
+  } else if (d.dS > p.hS) {
+    console.log(`Dealer had ${d.dS} while you had ${p.hS}. You lose.`);
+  } else if (p.hS > d.dS) {
+    console.log(`You had ${p.hS} while dealer had ${d.dS}. You win!`);
     p.balance += p.handBet * 2;
-  } else if (p.pS == d.dS) {
+  } else if (p.hS == d.dS) {
     console.log(`You push with the dealer. Bet refunded.`);
     p.balance += p.handBet;
   }
@@ -79,7 +82,11 @@ if (p.balance <= 0) {
 
 // player hit function
 function hit() {
-  dealCard(p);
+  if (p.hS > 21) {
+    console.log(`You've already busted. Click stand to continue.`);
+  } else {
+    dealCard(p);
+  }
 }
 
 // split function
@@ -106,16 +113,20 @@ function dealerDeal() {
 
 // play round function
 function playRound() {
-  p.pS = 0;
+  inRound = true;
+  p.hS = 0;
   d.dS = 0;
   p.handBet = p.bet;
   dealHand();
   for (let i = 0; i < p.hand.length; i++) {
-    p.pS += p.hand[i] > 10 ? 10 : p.hand[i];
+    p.hS += p.hand[i] > 10 ? 10 : p.hand[i];
+    document.querySelector(`#pCard${i}`).textContent = p.hand[i];
   }
   for (let i = 0; i < d.hand.length; i++) {
     d.dS += d.hand[i] > 10 ? 10 : d.hand[i];
+    document.querySelector(`#dCard${i}`).textContent = d.hand[i];
   }
+
   // if clicked element is hit
   // hit()
   // else if split
@@ -129,8 +140,27 @@ function playRound() {
 }
 
 document.querySelector("#set").addEventListener("click", function () {
-  p.bet = document.querySelector("#betAmt").value;
-  console.log(p.bet, p.handBet);
+  if (!inHand && document.querySelector("#betAmt").value <= p.balance) {
+    p.bet = document.querySelector("#betAmt").value;
+    // console.log(p.bet, p.handBet);
+  } else if (document.querySelector("#betAmt").value > p.balance) {
+    console.log(`You do not have enough funds to bet that amount.`);
+  }
 });
+
+document.querySelector("#deal").addEventListener("click", function () {
+  p.handBet = p.bet;
+  playRound();
+});
+
+document.querySelector("#hit").addEventListener("click", function () {
+  hit();
+});
+
+document.querySelector("#stand").addEventListener("click", function () {
+  dealerDeal();
+});
+
+document.querySelector("#reset").addEventListener("click", reset());
 
 // playRound();
