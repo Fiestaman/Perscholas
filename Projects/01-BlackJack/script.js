@@ -1,5 +1,6 @@
 // initialize player and dealer objects
 let p = {
+  nick: "player",
   balance: 100,
   bet: 1,
   maxBal: 100,
@@ -11,8 +12,9 @@ let p = {
   splitHB: 1,
 };
 let d = {
+  nick: "dealer",
   hand: [],
-  dS: 0,
+  hS: 0,
 };
 let highScore = 100;
 let inRound = false;
@@ -25,53 +27,47 @@ function pickCard() {
 // deal hand function
 function dealHand() {
   for (i = 1; i <= 2; i++) {
-    p.hand.push(pickCard());
-    d.hand.push(pickCard());
+    dealCard(p);
+    dealCard(d);
   }
 }
 
 // compare hand values to determine winner
 function scoreHand() {
-  if (p.hS > 21) {
-    console.log(`You busted. You lose.`);
-  } else if (d.dS > 21) {
+  // if (p.hS > 21) {
+  //   console.log(`You busted. You lose.`);
+  // } else
+  if (d.hS > 21) {
     console.log(`Dealer busted. You win.`);
     p.balance += p.handBet;
-  } else if (d.dS > p.hS) {
-    console.log(`Dealer had ${d.dS} while you had ${p.hS}. You lose.`);
-  } else if (p.hS > d.dS) {
-    console.log(`You had ${p.hS} while dealer had ${d.dS}. You win!`);
+  } else if (d.hS > p.hS) {
+    console.log(`Dealer had ${d.hS} while you had ${p.hS}. You lose.`);
+  } else if (p.hS > d.hS) {
+    console.log(`You had ${p.hS} while dealer had ${d.hS}. You win!`);
     p.balance += p.handBet * 2;
-  } else if (p.hS == d.dS) {
+  } else if (p.hS == d.hS) {
     console.log(`You push with the dealer. Bet refunded.`);
     p.balance += p.handBet;
   }
+  inRound = false;
+  return;
 }
 
 // deal a card function
 function dealCard(player) {
   player.hand.push(pickCard());
+  player.hS += player.hand[player.hand.length - 1];
+  const newCard = document.createElement("div");
+  newCard.classList.add("card");
+  newCard.setAttribute("id", `${player.name}Card${player.hand.length - 1}`);
+  newCard.textContent = player.hand[player.hand.length - 1];
+  document.querySelector(`#${player.nick}Cards`).appendChild(newCard);
 }
-
-// // increase bet function
-// function increase(amt = 1) {
-//   if (p.bet + amt > p.balance) {
-//     `You do not have enough funds to bet that much.`;
-//   }
-//   p.bet += amt;
-// }
-
-// // decrease bet function
-// function decrease(amt = 1) {
-//   if (p.bet + amt > p.balance) {
-//     `You do not have enough funds to bet that much.`;
-//   }
-//   p.bet -= amt;
-// }
 
 // reset balance function
 function reset() {
   p.balance = 100;
+  document.querySelector("#balance").innerHTML = 100;
 }
 
 // losing parameter
@@ -82,10 +78,19 @@ if (p.balance <= 0) {
 
 // player hit function
 function hit() {
-  if (p.hS > 21) {
-    console.log(`You've already busted. Click stand to continue.`);
-  } else {
-    dealCard(p);
+  if (inRound) {
+    if (p.hS > 21) {
+      console.log(`You've already busted. Click stand to continue.`);
+    } else {
+      dealCard(p);
+    }
+  }
+}
+
+function stand() {
+  if (inRound) {
+    dealerDeal();
+    scoreHand();
   }
 }
 
@@ -101,13 +106,13 @@ function split() {
 function double() {
   p.bet *= 2;
   dealCard(p);
+  stand();
 }
 
 // dealer deal own hand function
 function dealerDeal() {
-  while (d.dS < 17) {
+  while (d.hS < 17) {
     dealCard(d);
-    d.dS += d.hand[d.hand.length - 1];
   }
 }
 
@@ -115,32 +120,26 @@ function dealerDeal() {
 function playRound() {
   inRound = true;
   p.hS = 0;
-  d.dS = 0;
+  d.hS = 0;
   p.handBet = p.bet;
+  p.hand = [];
+  d.hand = [];
+  document.querySelector("#playerCards").innerHTML = "";
+  document.querySelector("#dealerCards").innerHTML = "";
   dealHand();
-  for (let i = 0; i < p.hand.length; i++) {
-    p.hS += p.hand[i] > 10 ? 10 : p.hand[i];
-    document.querySelector(`#pCard${i}`).textContent = p.hand[i];
-  }
-  for (let i = 0; i < d.hand.length; i++) {
-    d.dS += d.hand[i] > 10 ? 10 : d.hand[i];
-    document.querySelector(`#dCard${i}`).textContent = d.hand[i];
-  }
-
-  // if clicked element is hit
-  // hit()
-  // else if split
-
-  // else if double down
-  double();
-  // else clicked element is stand
-
-  scoreHand();
+  // for (let i = 0; i < p.hand.length; i++) {
+  //   p.hS += p.hand[i] > 10 ? 10 : p.hand[i];
+  //   document.querySelector(`#pCard${i}`).textContent = p.hand[i];
+  // }
+  // for (let i = 0; i < d.hand.length; i++) {
+  //   d.hS += d.hand[i] > 10 ? 10 : d.hand[i];
+  //   document.querySelector(`#dCard${i}`).textContent = d.hand[i];
+  // }
   console.log(p.hand, d.hand);
 }
 
 document.querySelector("#set").addEventListener("click", function () {
-  if (!inHand && document.querySelector("#betAmt").value <= p.balance) {
+  if (!inRound && document.querySelector("#betAmt").value <= p.balance) {
     p.bet = document.querySelector("#betAmt").value;
     // console.log(p.bet, p.handBet);
   } else if (document.querySelector("#betAmt").value > p.balance) {
@@ -149,17 +148,15 @@ document.querySelector("#set").addEventListener("click", function () {
 });
 
 document.querySelector("#deal").addEventListener("click", function () {
-  p.handBet = p.bet;
-  playRound();
+  if (!inRound) {
+    p.handBet = p.bet;
+    playRound();
+  }
 });
 
-document.querySelector("#hit").addEventListener("click", function () {
-  hit();
-});
+document.querySelector("#hit").addEventListener("click", hit());
 
-document.querySelector("#stand").addEventListener("click", function () {
-  dealerDeal();
-});
+document.querySelector("#stand").addEventListener("click", stand());
 
 document.querySelector("#reset").addEventListener("click", reset());
 
