@@ -1,5 +1,8 @@
 body {
   width: auto;
+  /* background-color: green; */
+  background-image: url(images/Velvet_20Green.jpg);
+  background-size: cover;
 }
 
 .card {
@@ -19,9 +22,11 @@ body {
 #dealerCards div {
   background-image: url(images/PLAYING_CARD_BACK.svg);
   background-size: cover;
+  background-color: white;
 }
 
 #playerCards div {
   background-image: url(images/PLAYING_CARD_BACK.svg);
   background-size: cover;
+  background-color: white;
 }
