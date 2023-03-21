@@ -161,6 +161,11 @@ function scoreUp() {
   document.querySelector("#highScore").innerHTML = highScore;
 }
 
+// update current bet function
+function betUp() {
+  document.querySelector("#currentBet").innerHTML = p.bet;
+}
+
 // change innerHTML to display correct card
 function displayCard(card) {
   if (card == 13) {
@@ -214,6 +219,7 @@ function playRound() {
 document.querySelector("#set").addEventListener("click", function () {
   if (!inRound && document.querySelector("#betAmt").value <= p.balance) {
     p.bet = +document.querySelector("#betAmt").value;
+    betUp();
     // console.log(p.bet, p.handBet);
   } else if (document.querySelector("#betAmt").value > p.balance) {
     console.log(`You do not have enough funds to bet that amount.`);
