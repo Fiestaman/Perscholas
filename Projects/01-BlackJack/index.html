@@ -21,16 +21,22 @@
       <button id="deal">FINALIZE BET & DEAL HAND</button>
     </section>
     <main>
-      <div id="dCard0">Q</div>
-      <div id="dCard1">K</div>
+      <section id="dealerCards">
+        <div class="card" id="dCard0"></div>
+        <div class="card" id="dCard1"></div>
+      </section>
       <button id="hit">HIT</button>
       <button id="stand">STAND</button>
       <button id="double">DOUBLE DOWN</button>
-      <button id="split">SPLIT</button>
-      <div id="pCard0">J</div>
-      <div id="pCard1">10</div>
+      <!-- <button id="split">SPLIT</button> -->
+      <section id="playerCards">
+        <div class="card" id="pCard0"></div>
+        <div class="card" id="pCard1"></div>
+      </section>
     </main>
     <aside>
+      <h1>High Score: <span id="highScore">100</span></h1>
+      <h3>Current balance: <span id="balance">100</span></h3>
       <button id="reset">RESET BALANCE</button>
 
       <!-- <button id="increase">INCREASE BET</button> -->
