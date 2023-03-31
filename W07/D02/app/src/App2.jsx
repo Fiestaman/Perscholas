@@ -1,18 +1,27 @@
-import "./index.css";
-import { useEffect, useState, setState } from "react";
+import "./index";
+import { useState, useEffect } from "react";
 
 export default function App() {
+  // Declare the state
+
   const [counter, setCounter] = useState(0);
   const [arr, setArr] = useState([10]);
   const [toggle, setToggle] = useState(false);
   const [evenCounter, setEvenCounter] = useState(0);
-
+  const [obj, setObj] = useState({});
   // const state = useState(5) returns an array,if you don't destructure you will have to use bracket notation
   // console.log(state[0])
 
-  //   const handleAdd = () => {
-  //     setCounter(counter + 1);
-  //   };
+  // Function to add one to the state
+  const handleAdd = () => {
+    // if counter is even before the update, update evenCounter
+    if (counter % 2 === 0) {
+      setEvenCounter(evenCounter + 1);
+    }
+    // sets counter to its current value + 1
+    setCounter(counter + 1);
+    console.log(counter);
+  };
 
   const handleChange = () => {
     const updateArr = [...arr];
@@ -22,27 +31,24 @@ export default function App() {
     setArr(updateArr);
   };
 
-  useEffect(() => {
+  const myUseEffectFunc = () => {
+    // Example of setting state of an obj (do this to avoid pass by reference error)
+    const objCopy = { ...obj };
+    console.log();
+    objCopy.name = "Nic";
+    setObj(objCopy);
     console.log(
-      `I'm only console logging on load and when evenCounter changes: ${evenCounter}`
+      `im only console logging when the evenCounter changes: ${evenCounter}`
     );
-  }, [evenCounter]);
-
-  // Function to add one to the state
-  const addOne = () => {
-    // if counter is even before the update, update evenCounter
-    if (counter % 2 === 0) {
-      setEvenCounter(evenCounter + 1);
-    }
-    // sets counter to its current value + 1
-    setCounter(counter + 1);
   };
+
+  useEffect(myUseEffectFunc, [evenCounter]);
 
   return (
     <div className="App">
       <h1>Total: {counter}</h1>
       <h1>Even: {evenCounter}</h1>
-      <button onClick={addOne}>Add One</button>
+      <button onClick={handleAdd}>Add One</button>
 
       <h2>Instructions</h2>
 
