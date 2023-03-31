@@ -1,0 +1,74 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+  margin: 0;
+  display: flex;
+}
+.homePage {
+  width: 50%;
+  height: 100vh;
+  /* border: 1px solid black; */
+}
+.employeePage {
+  width: 50%;
+  height: 100vh;
+  /* border: 1px solid red; */
+}
+.header {
+  width: 100%;
+  height: 25px;
+  font-size: 20px;
+  /* justify-content: center; */
+  /* align-items: center ; */
+}
+.searchbar {
+  width: 100%;
+}
+.employeeListItem {
+  width: 99%;
+  height: 4rem;
+  border: 1px solid red;
+  margin: 5px 0;
+  display: flex;
+}
+
+.employeeList {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-content: space-between;
+  width: 100%;
+  height: 100vh;
+  /* height: 15%; */
+}
+
+.name {
+  font-size: 16px;
+}
+
+button {
+  align-self: left;
+}
+
+.employeeListItemIcon {
+  width: auto;
+  height: 60px;
+  margin-left: 10px;
+}
+
+.info {
+  display: flex;
+  justify-content: center;
+  border: 1px solid lightgray;
+}
+
+.infoNamePosition {
+  margin: auto 0;
+}
+
+.infoBit {
+  border: 1px solid lightgray;
+  text-align: center;
+  margin: auto;
+}
