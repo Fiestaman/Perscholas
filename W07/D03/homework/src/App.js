@@ -1,7 +1,7 @@
 import "./styles.css";
 import HomePage from "./Components/HomePage";
 import EmployeePage from "./Components/EmployeePage";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function App() {
   const arr = [
@@ -99,12 +99,14 @@ export default function App() {
           selectEmployee={selectEmployee}
           term={term}
           setTerm={setTerm}
+          header="Employee Directory"
         />
       </div>
       <div className="employeePage">
         <EmployeePage
           selectedEmployee={selectedEmployee}
           setSelectedEmployee={setSelectedEmployee}
+          header="Employee"
         />
       </div>
     </div>
