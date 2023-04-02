@@ -71,7 +71,7 @@ article p::first-letter {
 }
 
 article p {
-  color: lightgray;
+  color: lightgray; /* added this to match mockup image */
   font-weight: 325;
   font-size: large;
 }
