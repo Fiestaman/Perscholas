@@ -1,4 +1,4 @@
-import HeaderNav from "./HeaderNav";
+import Nav from "./Nav";
 
 export default function Header(props) {
   return (
@@ -6,7 +6,7 @@ export default function Header(props) {
       <header>
         <h1>Sartre's List</h1>
         <h2>Better-Dressed People</h2>
-        <HeaderNav />
+        <Nav navLinks={props.navLinks} ariaLabel={props.ariaLabel} />
       </header>
     </>
   );
