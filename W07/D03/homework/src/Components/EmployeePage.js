@@ -1,12 +1,15 @@
+import Header from "./Header";
+
 export default function EmployeePage(props) {
   return (
     <>
       {props.selectedEmployee.name ? (
         <>
-          <div className="header">
-            <button onClick={() => props.setSelectedEmployee("")}>&lt;</button>
-            Employee
-          </div>
+          <Header
+            header={props.header}
+            selectedEmployee={props.selectedEmployee}
+            setSelectedEmployee={props.setSelectedEmployee}
+          />
           <div className="employee">
             <div className="info">
               <img src={props.selectedEmployee.icon} alt="Employee Icon" />
