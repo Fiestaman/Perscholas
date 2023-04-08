@@ -1,0 +1,23 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.ship {
+  display: flex;
+  border: 1px solid black;
+  height: 100px;
+  width: 250px;
+  margin: 25px;
+  background-color: teal;
+  border-radius: 5px;
+}
+
+.ships {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ship p {
+  margin: auto;
+}
