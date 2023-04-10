@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Static Template</title>
+  </head>
+  <body>
+    <h4>Annson Cook</h4>
+    <h3>1. How do you make a Circle in CSS?</h3>
+    <h4>
+      There are a few ways to make a circle in CSS.
+      <ol>
+        <li>
+          Border-radius property: takes four values, one for each corner of the
+          element. The values can be either numbers or percentages. If you want
+          to make a perfect circle, set the values to 50% for all four corners.
+        </li>
+        <li>Shape-outside property: takes a value of circle().</li>
+        <li>
+          Clip-path property: takes a value to define the shape of the circle.
+        </li>
+        <li>
+          SVG element: The &ltcircle&gt element takes a number of attributes,
+          including cx, cy, r, and fill. The cx and cy attributes define the
+          center of the circle, the r attribute defines the radius of the
+          circle, and the fill attribute defines the fill color of the circle.
+        </li>
+      </ol>
+    </h4>
+    <!-- Here is an example of how to make a circle using the border-radius property:
+      
+      .circle {
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+      }
+      Here is an example of how to make a circle using the shape-outside property:
+      
+      .circle {
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+      }
+      
+      .circle:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        border-radius: 50%;
+        clip-path: circle(50%);
+      }
+      Here is an example of how to make a circle using the svg element:
+      
+      <svg width="100" height="100" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="40" fill="blue" />
+      </svg></h4> -->
+    <h3>2. What is Z-index?</h3>
+    <h4>
+      Z-index is a CSS property that specifies the stacking order of elements
+      that overlap. An element with a greater z-index will always be in front of
+      an element with a lower z-index.
+    </h4>
+    <h3>3. What is a Vendor Prefix and What is it's Purpose?</h3>
+    <h4>
+      A vendor prefix is a string that is added to the name of a CSS property or
+      JavaScript function to indicate that it is a proprietary feature of a
+      particular browser vendor. For example, the -webkit- prefix is used by
+      Webkit browsers (such as Chrome and Safari), the -moz- prefix is used by
+      Mozilla browsers (such as Firefox), and the -ms- prefix is used by
+      Microsoft browsers (such as Internet Explorer).
+      <br />
+      Vendor prefixes are used because browsers often implement new features
+      before they are standardized. By adding a vendor prefix to a feature,
+      browser vendors can test the feature in their browsers and get feedback
+      from users without worrying about breaking compatibility with other
+      browsers.
+    </h4>
+    <h3>4. What is the difference between CSS Grid and Flexbox?</h3>
+    <h4>
+      CSS Grid is a two-dimensional layout system, which means that you can use
+      it to create layouts that have both rows and columns. It is also very
+      flexible, and you can use it to create complex layouts that would be
+      difficult or impossible to create with Flexbox.
+      <br />
+      Flexbox is a one-dimensional layout system, which means that you can only
+      use it to create layouts that have rows or columns, but not both. It is
+      also not as flexible as CSS Grid, but it is easier to learn and use.
+    </h4>
+    <h3>
+      5. How might you Speed Up a Slow App? hint Google Lighthouse in Chrome
+      Developer Tools....
+    </h3>
+    <h4>
+      You can use Lighthouse to audit your website for performance,
+      accessibility, progressive web apps, SEO, and more.
+    </h4>
+    <h3>6. What is CRUD?</h3>
+    <h4>
+      CRUD is an acronym for Create, Read, Update, and Delete. It is a term used
+      in computer programming to describe the four basic operations that can be
+      performed on data.
+    </h4>
+    <ul>
+      <li>Create: This operation creates a new record of data.</li>
+      <li>
+        Read: This operation retrieves a record of data from the database.
+      </li>
+      <li>Update: This operation modifies an existing record of data.</li>
+      <li>
+        Delete: This operation removes a record of data from the database.
+      </li>
+    </ul>
+    <h3>7. What is OOP?</h3>
+    <h4>
+      OOP stands for Object-Oriented Programming. It is a programming paradigm
+      that is based on the concept of objects. Objects are entities that have
+      state and behavior. The state of an object is represented by its data, and
+      the behavior of an object is represented by its methods.
+      <p>
+        OOP is a powerful programming paradigm that has many advantages over
+        other programming paradigms. Some of the advantages of OOP include:
+      </p>
+      <ul>
+        <li>
+          Encapsulation: Encapsulation is the process of hiding the internal
+          details of an object from the outside world. This makes it difficult
+          for other objects to accidentally modify the state of an object.
+        </li>
+        <li>
+          Inheritance: Inheritance is the process of creating a new object that
+          inherits the properties and methods of an existing object. This can
+          save a lot of time and effort, as you do not have to write the code
+          for the properties and methods of the new object from scratch.
+        </li>
+        <li>
+          Polymorphism: Polymorphism is the ability of an object to respond to
+          different messages in different ways. This allows you to create
+          objects that can be used in a variety of different ways.
+        </li>
+      </ul>
+    </h4>
+  </body>
+</html>
