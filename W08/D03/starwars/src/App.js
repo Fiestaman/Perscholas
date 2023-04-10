@@ -1,44 +1,48 @@
 import { useEffect, useState } from "react";
 import "./styles.css";
-import Ship from "./components/Ship";
+import StarShipCard from "./components/StarShipCard";
+
+const url = "https://swapi.dev/api/starships/";
 
 export default function App() {
   const [ships, setShips] = useState([]);
-
   const url = "https://swapi.dev/api/starships/";
 
-  const getStarships = async () => {
+  const [reacturl, setUrl] = useState(url);
+
+  const getships = async () => {
+    if (reacturl === null) return;
+    console.log(reacturl);
     try {
-      const response = await fetch(url);
+      const response = await fetch(reacturl);
       const data = await response.json();
       setShips([...ships, ...data.results]);
-      // console.log(ships);
-    } catch (e) {
-      console.log(e);
+      setUrl(data.next);
+      console.log(ships);
+      console.log(reacturl);
+    } catch (err) {
+      //console.log(err);
     }
   };
 
-  const Ships = () => {
+  const allships = () => {
     return ships.map((ship) => {
-      return (
-        <>
-          <Ship ship={ship} />
-        </>
-      );
+      return <StarShipCard ship={ship} />;
     });
   };
 
   useEffect(() => {
-    getStarships();
-  }, []);
+    getships();
+  }, [reacturl]);
 
   return (
-    <div className="App">
-      <h1>STAR WARS STARSHIPS</h1>
-      <div className="ships">
-        {ships.length === 0 ? <p>Loading...</p> : Ships()}
-        {/* {starships} */}
+    <>
+      <div className="top">
+        <p>Star Wars Starships</p>
       </div>
-    </div>
+      <div className="App">
+        {ships.length === 0 ? <p>Loading</p> : allships()}
+      </div>
+    </>
   );
 }
