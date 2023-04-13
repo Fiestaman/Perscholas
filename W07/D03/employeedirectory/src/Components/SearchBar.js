@@ -7,6 +7,7 @@ export default function SearchBar(props) {
         onKeyUp={(e) => {
           props.setTerm(e.target.value);
         }}
+        placeholder="Enter name to search"
       />
     </>
   );

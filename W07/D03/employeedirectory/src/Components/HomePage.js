@@ -7,7 +7,7 @@ export default function HomePage(props) {
 
   return (
     <>
-      <Header header={props.header} />
+      <Header header={props.header} setDark={props.setDark} dark={props.dark} />
       <div className="searchBar">
         <SearchBar term={props.term} setTerm={props.setTerm} />
       </div>

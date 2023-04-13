@@ -76,6 +76,7 @@ export default function App() {
   const [employees, setEmployees] = useState(arr);
   const [selectedEmployee, setSelectedEmployee] = useState({});
   const [term, setTerm] = useState("");
+  const [dark, setDark] = useState(true);
 
   // setEmployees([...arr])
   // console.log(employees)
@@ -92,7 +93,7 @@ export default function App() {
   };
 
   return (
-    <div className="App">
+    <div className={`App${dark ? " dark" : ""}`}>
       <div className="homePage">
         <HomePage
           employees={employees}
@@ -100,6 +101,8 @@ export default function App() {
           term={term}
           setTerm={setTerm}
           header="Employee Directory"
+          setDark={setDark}
+          dark={dark}
         />
       </div>
       <div className="employeePage">
