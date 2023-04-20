@@ -19,6 +19,20 @@ export default function App() {
     return sum % 10 === 0;
   };
 
+  // const validCard = (num) => {
+  //   if (!num) return;
+  //   const arr = num.toString().split("");
+  //   sum = arr.reduce((acc, num, i) => {
+  //     let int = parseInt(num);
+  //     if (i % 2 === arr.length % 2) {
+  //       return (acc += int * 2 > 9 ? int * 2 - 9 : int * 2);
+  //     } else {
+  //       return (acc += int);
+  //     }
+  //   }, 0);
+  //   return sum % 10 === 0;
+  // };
+
   // validCard(1234567890123456); //should be false
   // validCard(4408041234567893); //should be true
   // validCard(38520000023237); //should be true
