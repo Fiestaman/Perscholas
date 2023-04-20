@@ -22,7 +22,7 @@ export default function App() {
   // const validCard = (num) => {
   //   if (!num) return;
   //   const arr = num.toString().split("");
-  //   sum = arr.reduce((acc, num, i) => {
+  //   let sum = arr.reduce((acc, num, i) => {
   //     let int = parseInt(num);
   //     if (i % 2 === arr.length % 2) {
   //       return (acc += int * 2 > 9 ? int * 2 - 9 : int * 2);
