@@ -1,4 +1,5 @@
 const React = require("react");
+const Nav = require("../../components/Nav");
 
 class Index extends React.Component {
   render() {
@@ -6,6 +7,7 @@ class Index extends React.Component {
     return (
       <div>
         <h1>Fruits Index Page</h1>
+        <Nav link="/fruits/new" text="Create new fruit" />
         <ul>
           {fruits.map((fruit, i) => {
             return (

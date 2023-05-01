@@ -14,8 +14,38 @@ app.set("views", "./views");
 
 app.engine("jsx", require("jsx-view-engine").createEngine());
 
+// Custom middleware
+app.use(express.urlencoded({ extended: false }));
+
+app.use((req, res, next) => {
+  console.log("I run for all the routes");
+  next();
+});
+
+// I.N.D.U.C.E.S.
+// Index (route)
+// New (route)
+// Delete (verb)
+// Update (verb)
+// Create (verb)
+// Edit (route)
+// Show (route)
+
 app.get("/fruits", function (req, res) {
+  console.log("Index Controller function running...");
   res.render("./fruits/Index", { fruits: fruits });
+});
+
+//put this above your Show route
+app.get("/fruits/new", (req, res) => {
+  res.render("./fruits/New");
+});
+
+app.post("/fruits", (req, res) => {
+  req.body.readyToEat = req.body.readyToEat === "on";
+  fruits.push(req.body);
+  //   res.send("data received and created");
+  res.redirect("/fruits");
 });
 
 //add show route
@@ -34,8 +64,20 @@ app.get("/vegetables", function (req, res) {
 app.get("/vegetables/:id", function (req, res) {
   res.render("./vegetables/Show", {
     //second param must be an object
-    vegetable: vegetables[req.params.id], //there will be a variable available inside the jsx file called fruit, its value is fruits[req.params.indexOfFruitsArray]
+    vegetable: vegetables[req.params.id],
   });
+});
+
+//put this above your Show route
+app.get("/vegetables/new", (req, res) => {
+  res.render("./vegetables/New");
+});
+
+app.post("/vegetables", (req, res) => {
+  req.body.readyToEat = req.body.readyToEat === "on";
+  vegetables.push(req.body);
+  //   res.send("data received and created");
+  res.redirect("/vegetables");
 });
 
 app.listen(3000, () => {
